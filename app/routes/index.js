@@ -10,7 +10,6 @@ const movies = [
     {id: 55, movie: "Harry Potter and the Half-Blood Prince"},
 ];
 
-//GOOD
 //GET
 //localhost:3000/movies
 router.get("/", (req, res) => {
@@ -24,7 +23,6 @@ router.get("/", (req, res) => {
     });
 });
 
-//GOOD
 //GET by Id
 //localhost:3000/movies/45
 router.get("/45", (req,res) => {
@@ -40,7 +38,6 @@ router.get("/45", (req,res) => {
     });
 });
 
-//GOOD
 //PUT by ID
 //localhost:3000/movies/89
 router.put("/89", (req,res) => {
@@ -50,12 +47,37 @@ router.put("/89", (req,res) => {
         metadata: {
             hostname: req.hostname,
             method: req.method,
-            data: "Harry Potter and the Chamber of Secrets",
+            data: [
+                {
+                    "id": 45,
+                    "movie": "Harry Potter and the Sorcerer's Stone"
+                },
+                {
+                    "id": 89,
+                    "movie": "Harry Potter and the Chamber of Secrets"
+                },
+                {
+                    "id": 9,
+                    "movie": "Harry Potter and the Prisoner of Azkaban"
+                },
+                {
+                    "id": 5,
+                    "movie": "Harry Potter and the Goblet of Fire"
+                },
+                {
+                    "id": 32,
+                    "movie": "Harry Potter and the Order of Phoenix"
+                },
+                {
+                    "id": 55,
+                    "movie": "Harry Potter and the Half-Blood Prince"
+                }
+            ],
         },
     });
 });
 
-//GOOD
+
 //DELETE by Id
 //localhost:3000/movies/9
 router.delete("/9", (req,res) => {
@@ -65,13 +87,33 @@ router.delete("/9", (req,res) => {
         metadata: {
             hostname: req.hostname,
             method: req.method,
-            data: "Harry Potter and the Prisoner of Azkaban"
+            data: [
+                {
+                    "id": 45,
+                    "movie": "Harry Potter and the Sorcerer's Stone"
+                },
+                {
+                    "id": 89,
+                    "movie": "Harry Potter and the Chamber"
+                },
+                {
+                    "id": 5,
+                    "movie": "Harry Potter and the Goblet of Fire"
+                },
+                {
+                    "id": 32,
+                    "movie": "Harry Potter and the Order of Phoenix"
+                },
+                {
+                    "id": 55,
+                    "movie": "Harry Potter and the Half-Blood Prince"
+                }
+            ]
         },
     });
 });
 
-//GOOD
-//POST
+
 //POST localhost:3000/movies
 router.post("/", (req, res) => {
 const { data } = req.body;
@@ -81,7 +123,7 @@ res.status(200).json({
     metadata: {
         hostname: req.hostname, 
         method: req.method,
-        data,
+        data: data
     },
 });
 });

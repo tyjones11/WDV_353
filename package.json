@@ -1,0 +1,22 @@
+{
+  "name": "moduel_1",
+  "version": "1.0.0",
+  "description": "Module1 NodeJS HTTP Request and Response",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "start": "nodeman sesrver"
+  },
+  "keywords": [
+    "NodeJS",
+    "HTTP",
+    "Request",
+    "and",
+    "Response"
+  ],
+  "author": "Timothy Jones",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

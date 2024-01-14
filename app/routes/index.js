@@ -1,27 +1,34 @@
 const express = require("express");
 const router = express.Router();
 
-//localhost:3000/api
-router.get("/", (req, res) => {
+const movies = [
+    {id: 45, movie: "Harry Potter and the Sorcerer's Stone"},
+    {id: 89, movie: "Harry Potter and the Chamber of Secrets"},
+    {id: 9, movie: "Harry Potter and the Prisoner of Azkaban"},
+    {id: 5, movie: "Harry Potter and the Goblet of Fire"},
+    {id: 32, movie: "Harry Potter and the Order of Phoenix"},
+    {id: 55, movie: "Harry Potter and the Half-Blood Prince"},
+    {id: 29, movie: "Harry Potter and the Deathly Hallows"},
+];
+
+//GET
+//localhost:3000/movies
+router.get("/movies", (req, res) => {
     res.status(200).json({
-        message: "GET to API",
+        message: "GET list of movies",
         metadata: {
             hostname: req.hostname, 
             method: req.method,
+            data: movies,
         },
     });
 });
 
-//using get by id
-router.get("/:id", (req,res) => {
-    const { id } = req.params;
-    res.status(200).json({
-        message: "GET by Id for /api",
-        metadata: {
-            hostname: req.hostname,
-            method: req.method,
-        },
-    });
+//GET by Id
+//localhost:3000/movies/45
+router.get("/movies:bob", (req,res) => {
+    const { bob } = req.params;
+    console.log(bob);
 });
 
 router.put("/:id", (req,res) => {
@@ -49,8 +56,8 @@ router.delete("/:id", (req,res) => {
 router.post("/", (req, res) => {
 const { data } = req.body;
 res.status(200).json({
-    message: "POST to /api",
-    data: data,
+    message: "POST to /movies",
+    data,
     metadata: {
         hostname: req.hostname, 
         method: req.method,

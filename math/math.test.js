@@ -1,37 +1,36 @@
 const {
-   add,
-   subtract,
-   multiply,
-   divide,
-   squareRoot,
+   sum,
+   sub,
+   mult,
+   div,
+   sqrt,
    max
 } = require("./math");
 
 describe("Testing the math objects", () => {
     test("should take 2 numbers and return the sum", () => {
-        const result = add();
-        expect(result).toBe();
+        expect(sum(2,2)).toBe(4);
     });
 
     test("should take 2 parameters and return the difference", () => {
-        expect(subtract()).toBe();
+        expect(sub(3,2)).toBe(1);
     });
 
     test("should take 2 numbers and return the product", () => {
-        expect(multiply()).toBe();
+        expect(mult(2,4)).toBe(8); 
     });
 
     test("should take 2 parameters and return the quotient", () => {
-        expect(divide()).toBe();
+        expect(div(10,2)).toBe(5);
     });
 
 
     test("should take a number and return the square root", () => {
-        expect(squareRoot()).toBe();
+        expect(Math.sqrt(9)).toBe(3);
     });
 
 
     test("should take 2 numbers and return the max(or highest) number", () => {
-        expect(max()).toBe();
+        expect(Math.max(1, 5, 9)).toBe(9);
     });
 });

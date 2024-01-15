@@ -1,26 +1,26 @@
-const add = (str) => {
-    return str.toAdd();}
+const sum = (a, b) => {
+    return a + b}
 
-const subtract = (str) => {
-    return str.toSubtract();}
+const sub = (a, b) => {
+    return a - b}
 
-const multiply = (str) => {
-    return str.toMultiply();}
+const mult = (a, b) => {
+    return a * b}
 
-const divide = (str) => {
-    return str.toDivide();}
+const div = (a, b) => {
+    return a/b }
 
-const squareRoot = (str) => {
-    return str.toSquareRoot();}
+const sqrt = Math => {
+    return Math.toSqrt();}
 
-const max = (str) => {
-    return str.toMax();}
+const max = (Math) => {
+    return Math.toMax();}
 
 module.exports = {
-    add,
-    subtract,
-    multiply,
-    divide,
-    squareRoot,
+    sum,
+    sub,
+    mult,
+    div,
+    sqrt,
     max
 }

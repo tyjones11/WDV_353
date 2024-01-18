@@ -1,10 +1,8 @@
-// use design pattern
-// server/listener/router design pattern server/app/router
-
-const http = require("http");
-const app = require("./app/app");
 require("dotenv").config();
+const app = require("./app");
 
-http.createServer(app).listen(process.env.port, () => {
-    console.log(`Server is running on port: ${process.env.port}`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT , () => {
+    console.log(`Server is running on ${PORT}`);
 });

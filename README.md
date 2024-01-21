@@ -17,3 +17,6 @@ Full CRUD on object on MongoDB with Postman
 ## 2.5 Mongoose Validation
 ## Videos from this assignment are connected to Assignemnt 2.3
 ## There was not another branch create for it
+
+Adding more properties and datatypes
+Validating Schemas

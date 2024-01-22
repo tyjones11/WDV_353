@@ -88,7 +88,7 @@ const createDirector = async (req, res) => {
         res.status(200).json({
             data: newDirector,
             success: true,
-            message: `${req.method} - request to Director endpoint`
+            message: "Director Saved"
         });
     } catch (error) {
         if (error.name == "ValidationError"){

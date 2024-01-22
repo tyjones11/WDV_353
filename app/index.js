@@ -13,6 +13,6 @@ app.get("/", (req, res) => {
     });
 });
 
-app.use("/api/v1", routeHandler);
+app.use("/api", routeHandler);
 
 module.exports = app;

@@ -1,12 +1,12 @@
-const Authors = require("../modules/Authors");
+const Directors = require("../modules/Directors");
 
-const getAllAuthors = async (req, res) => {
-    const authors = await Authors.find({});
+const getAllDirectors = async (req, res) => {
+    const directors = await Directors.find({});
     try {
     res.status(200).json({
-        data: authors,
+        data: directors,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Director endpoint`
     });
     } catch (error) {
         if (error.name == "ValidationError"){
@@ -19,13 +19,14 @@ const getAllAuthors = async (req, res) => {
     }
 };
 
-const getAuthorById = (req, res) => {
+const getDirectorById = async (req, res) => {
     const {id} = req.params;
     try {
+    const director = await Directors.findById(id, req.body, {new: true});
     res.status(200).json({
-        id,
+        data: director,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Director endpoint`
     });
     } catch (error) {
         if (error.name == "ValidationError"){
@@ -38,14 +39,14 @@ const getAuthorById = (req, res) => {
     }
 };
 
-const updateAuthor = async (req, res) => {
+const updateDirector = async (req, res) => {
     const {id} = req.params;
     try{
-    const author = await Authors.findByIdAndUpdate(id, req.body, {new: true});
+    const director = await Directors.findByIdAndUpdate(id, req.body, {new: true});
     res.status(200).json({
-        data: author,
+        data: director,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Director endpoint`
     });
     } catch (error){
         if (error.name == "ValidationError"){
@@ -58,13 +59,15 @@ const updateAuthor = async (req, res) => {
     }
 };
 
-const deleteAuthor = (req, res) => {
+const deleteDirector = async (req, res) => {
     const {id} = req.params;
     try {
+    const director = await Directors.findByIdAndDelete(id, req.body, {new: true});
     res.status(200).json({
         id,
+        data: director,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Director endpoint`
     });
     } catch (error) {
         if (error.name == "ValidationError"){
@@ -77,15 +80,15 @@ const deleteAuthor = (req, res) => {
     }
 };
 
-const createAuthor = async (req, res) => {
-    const { author } = req.body;
+const createDirector = async (req, res) => {
+    const { director } = req.body;
     try {
-        const newAuthor = await Authors.create(author);
-        console.log("data >>>", newAuthor);
+        const newDirector = await Directors.create(director);
+        console.log("data >>>", newDirector);
         res.status(200).json({
-            data: newAuthor,
+            data: newDirector,
             success: true,
-            message: `${req.method} - request to Author endpoint`
+            message: `${req.method} - request to Director endpoint`
         });
     } catch (error) {
         if (error.name == "ValidationError"){
@@ -99,9 +102,9 @@ const createAuthor = async (req, res) => {
 };
 
 module.exports = {
-    createAuthor, 
-    deleteAuthor,
-    updateAuthor,
-    getAllAuthors,
-    getAuthorById,
+    createDirector, 
+    deleteDirector,
+    updateDirector,
+    getAllDirectors,
+    getDirectorById,
 };

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const authorRoutes = require("./authorRoutes");
+const directorRoutes = require("./directorRoutes");
 
 router.get("/", (req, res) => {
     res.status(200).json({
@@ -9,6 +9,6 @@ router.get("/", (req, res) => {
     });
 });
 
-router.use("/authors", authorRoutes);
+router.use("/directors", directorRoutes);
 
 module.exports = router;

@@ -1,22 +1,24 @@
-# Module 2
+# Assignment 2.6 NodeJS MongoDB
 
-## Assignemnt 2.3 RESTful_API_Setup
-Setup routes
-Create Controllers for MongoDB
-Attach controller functions to corresponding HTTP verbs
+Create all database functionality for 
+```
+GET
+POST
+PUT
+GET by Id
+Delete by Id
+```
 
-## 2.4 Introduction to Mongoose
-## Videos from this assignment are connected to Assignemnt 2.3
-## There was not another branch create for it
+Controller functions for both modules
 
-Finish making controllers
-Connect to MongoDB with Node
-Create Mongoose Schema for model
-Full CRUD on object on MongoDB with Postman
+Seperated route files with error handling
 
-## 2.5 Mongoose Validation
-## Videos from this assignment are connected to Assignemnt 2.3
-## There was not another branch create for it
+Mongoose Schema
+```
+Two modules that relate to each other - directors and movies
+3-5 properties on each model
+At least 4 different data types over all
+Validate all necessary parts of the model
+```
 
-Adding more properties and datatypes
-Validating Schemas
+Use Postman to create collections and requests

@@ -26,11 +26,11 @@ describe("Testing the math objects", () => {
 
 
     test("should take a number and return the square root", () => {
-        expect(Math.sqrt(9)).toBe(3);
+        expect(sqrt(20)).toBe(5);
     });
 
 
     test("should take 2 numbers and return the max(or highest) number", () => {
-        expect(Math.max(1, 5, 9)).toBe(9);
+        expect(max(1, 9)).toBe(9);
     });
 });

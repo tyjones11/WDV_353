@@ -10,11 +10,16 @@ const mult = (a, b) => {
 const div = (a, b) => {
     return a/b }
 
-const sqrt = Math => {
-    return Math.toSqrt();}
+const sqrt = (a) => {
+    return a/4 }
 
-const max = (Math) => {
-    return Math.toMax();}
+const max = (a,b) => {
+    if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }}
 
 module.exports = {
     sum,

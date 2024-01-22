@@ -1,14 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const movies = [
-    {id: 45, movie: "Harry Potter and the Sorcerer's Stone"},
-    {id: 89, movie: "Harry Potter and the Chamber"},
-    {id: 9, movie: "Harry Potter and the Prisoner of Azkaban"},
-    {id: 5, movie: "Harry Potter and the Goblet of Fire"},
-    {id: 32, movie: "Harry Potter and the Order of Phoenix"},
-    {id: 55, movie: "Harry Potter and the Half-Blood Prince"},
-];
+const movies = [];
 
 //GET
 //localhost:3000/movies
@@ -25,54 +18,29 @@ router.get("/", (req, res) => {
 
 //GET by Id
 //localhost:3000/movies/45
-router.get("/45", (req,res) => {
-    const { data } = req.params;
-    console.log(movies);
+router.get('/get/:id', (req,res) => {
+    const { id } = req.params.id;
+    const movie = movies.findById(id, req.body, {new: true});
     res.status(200).json({
         message: "GET by Id for /movies",
         metadata: {
             hostname: req.hostname,
+            id: id,
             method: req.method,
-            data: "Harry Potter and the Sourcer's Stone",
         },
     });
 });
 
 //PUT by ID
 //localhost:3000/movies/89
-router.put("/89", (req,res) => {
-    const { data } = req.params;
+router.put('/put/:id', (req,res) => {
+    const { id } = req.params.id;
+    const movie = movies.findByIdAndUpdate(id, req.body, {new: true});
     res.status(200).json({
         message: "PUT by Id for /movies",
         metadata: {
             hostname: req.hostname,
             method: req.method,
-            data: [
-                {
-                    "id": 45,
-                    "movie": "Harry Potter and the Sorcerer's Stone"
-                },
-                {
-                    "id": 89,
-                    "movie": "Harry Potter and the Chamber of Secrets"
-                },
-                {
-                    "id": 9,
-                    "movie": "Harry Potter and the Prisoner of Azkaban"
-                },
-                {
-                    "id": 5,
-                    "movie": "Harry Potter and the Goblet of Fire"
-                },
-                {
-                    "id": 32,
-                    "movie": "Harry Potter and the Order of Phoenix"
-                },
-                {
-                    "id": 55,
-                    "movie": "Harry Potter and the Half-Blood Prince"
-                }
-            ],
         },
     });
 });
@@ -80,35 +48,14 @@ router.put("/89", (req,res) => {
 
 //DELETE by Id
 //localhost:3000/movies/9
-router.delete("/9", (req,res) => {
-    const { data } = req.params;
+router.delete("/:id", (req,res) => {
+    const { id } = req.params.id;
+    const movie = movies.findByIdAndDelete(id, req.body, {new: true});
     res.status(200).json({
         message: "DELETE by Id for /movies",
         metadata: {
             hostname: req.hostname,
             method: req.method,
-            data: [
-                {
-                    "id": 45,
-                    "movie": "Harry Potter and the Sorcerer's Stone"
-                },
-                {
-                    "id": 89,
-                    "movie": "Harry Potter and the Chamber"
-                },
-                {
-                    "id": 5,
-                    "movie": "Harry Potter and the Goblet of Fire"
-                },
-                {
-                    "id": 32,
-                    "movie": "Harry Potter and the Order of Phoenix"
-                },
-                {
-                    "id": 55,
-                    "movie": "Harry Potter and the Half-Blood Prince"
-                }
-            ]
         },
     });
 });
@@ -116,14 +63,15 @@ router.delete("/9", (req,res) => {
 
 //POST localhost:3000/movies
 router.post("/", (req, res) => {
-const { data } = req.body;
+const new_movie = req.body ;
+movies.push(new_movie);
 console.log(req.body);
 res.status(200).json({
     message: "POST to /movies",
     metadata: {
         hostname: req.hostname, 
         method: req.method,
-        data: data
+        data: new_movie
     },
 });
 });

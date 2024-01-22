@@ -38,7 +38,7 @@ const moviesSchema = new mongoose.Schema({
         maxlength: [500, "Description cannot be more than 500 characters"],
     },
     director: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.String,
         ref: 'Director',
     },
 },

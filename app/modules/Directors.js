@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const directorsSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "You are required to have an Author"],
-        unique: [true, "You can only have one Author of that name"],
+        required: [true, "You are required to have an Director"],
+        unique: [true, "You can only have one Director with that name"],
         trim: true,
         maxlength: [50, "Your name is too long"],
     }, 

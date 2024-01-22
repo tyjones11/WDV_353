@@ -5,6 +5,7 @@ const moviesSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+        unique: [true, "You can only have one movie with that title"],
         maxlength: [50,"Name cannot be more than 50 characters"],
     }, 
     year: {

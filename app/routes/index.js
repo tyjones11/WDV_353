@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const directorRoutes = require("./directorRoutes");
-const movieRoutes = require("./movieRoutes");
+const authorRoutes = require("./authorRoutes");
 
 router.get("/", (req, res) => {
     res.status(200).json({
@@ -10,7 +9,6 @@ router.get("/", (req, res) => {
     });
 });
 
-router.use("/directors", directorRoutes);
-router.use("/movies", movieRoutes);
+router.use("/authors", authorRoutes);
 
 module.exports = router;

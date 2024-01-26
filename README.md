@@ -1,24 +1,12 @@
-# Assignment 2.6 NodeJS MongoDB
+# 3.1 MongoDB Query Operations
 
-Create all database functionality for 
+Comparison Query Operatiors
 ```
-GET
-POST
-PUT
-GET by Id
-Delete by Id
+$gt (Greater Than): operator is used to filter documents where the value of a field is greater than a specified value.
+$lt (Less Than): operator is used to filter documents where the value of a field is less than a specified value.
+$gte (Greater Than or Equal To): Matches values greater than or equal to a specified value.
+$lte (Less Than or Equal To): Matches values less than or equal to a specified value.
+$ne (Not Equal To): Matches values that are not equal to a specified value.
+$in (In): Matches any of the values specified in an array.
+$nin (Not In): Matches values that are not in the specified array.
 ```
-
-Controller functions for both modules
-
-Seperated route files with error handling
-
-Mongoose Schema
-```
-Two modules that relate to each other - directors and movies
-3-5 properties on each model
-At least 4 different data types over all
-Validate all necessary parts of the model
-```
-
-Use Postman to create collections and requests

@@ -2,24 +2,19 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const connect = async () => {
-    try {
-        const connect = await mongoose.connect(process.env.mongodb, {
-            useUnifiedTopology: true,
-        });
-        console.log(`MongoDB is up and running`);
-    } catch (error) {
-        console.log(error);
-    }
+    console.log('Mocked Connection');
 };
 
 const savePost = async (newPost) => {
-    console.log("Saving real post");
-    return await newPost.save();
+    console.log("Saving Mocked Post");
+    return Promise.resolve({
+        title: 'A tree grows in Brooklyn',
+        post: 'It sure does',
+    });
 };
 
 const disconnect = async () => {
-    console.log("Real Disconnect")
-    await mongoose.connection.close();
+    console.log("Mocked Disconnect")
 };
 
 module.exports = connect, savePost, disconnect;

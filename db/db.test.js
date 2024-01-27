@@ -3,6 +3,8 @@ const Post = require("../model/postModel");
 
 //jest 3 functions
 //describe, test(), expect()
+jest.mock('./db');
+
 beforeALL(async () => {
     return await connect();
 });

@@ -10,21 +10,18 @@ router.post("/post", async (req, res) => {
         title: title,
         post: post,
     });
-    
-    const dbPost = await savePost(newPost);
-    try {
-        res.status(201).json({
-            title: title,
-            post: post
-        });
-    } catch (error) {
+
+    savePost(newPost).then(dbPost => {
+        res.status(201).json({post: dbPost});
+    })
+    .catch(error => {
         res.status(501).json({
             error: {
                 message: error.message,
                 status: error.status,
             },
         });
-    };
+    });
 });
 
 module.exports = router;

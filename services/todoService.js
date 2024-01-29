@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const todoService = async () => {
     console.log('Real Todos');
-    return await axios.getAdapter(`${process.env.todosURL}`);
+    return await axios.get(`${process.env.todosURL}`);
 };
 
 const todoServiceById = async (id) => {
@@ -15,4 +15,3 @@ module.exports = {
     todoService,
     todoServiceById,
 };
-

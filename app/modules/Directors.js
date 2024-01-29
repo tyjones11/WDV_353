@@ -16,6 +16,11 @@ const directorsSchema = new mongoose.Schema({
         type: String,
         required: [true, "You are required to have the state"],
         maxlength: [50, "The state name is too long"],
+    },
+    id: {
+        type: Number,
+        required: true,
+        unique: [true, "You can only have one id with that number"],
     }
 
 },

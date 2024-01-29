@@ -1,7 +1,7 @@
 const Movies = require("../modules/Movies");
 
 const getAllMovies = async (req, res) => {
-    const movies = await Movies.find({});
+    const movies = await Movies.find(req.query);
     try {
     res.status(200).json({
         data: movies,

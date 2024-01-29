@@ -1,8 +1,26 @@
 const Movies = require("../modules/Movies");
 
 const getAllMovies = async (req, res) => {
-    const movies = await Movies.find(req.query);
+    let querString = JSON.stringify(req.query);
+
+    querString = querString.replace(
+    /\b(gt|gte|lt|lte)\b/g,
+    (match) => `$${match}`);
+
+    let query = Movies.find(JSON.parse(querString)); 
+
+    if (req.query.select){
+        const fields = req.query.select.split(',').join(" ");
+        query = Movies.find({}).select(fields);
+    }
+
+    if (req.query.sort){
+        const sortBy = req.query.sort.split(',').join(" ");
+        query = Movies.find({}).sort(sortBy);        
+    }
     try {
+    const movies = await query;
+
     res.status(200).json({
         data: movies,
         success: true,

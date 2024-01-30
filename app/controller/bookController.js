@@ -6,7 +6,7 @@ const getAllBooks = async (req, res) => {
     res.status(200).json({
         data: books,
         success: true,
-        message: `${req.method} - request to Book endpoint`
+        message: `Retrieved All Books`
     });
     } catch (error) {
         if (error.name == "ValidationError"){
@@ -26,7 +26,7 @@ const getBookById = async (req, res) => {
     res.status(200).json({
         data: book,
         success: true,
-        message: `${req.method} - request to Book endpoint`
+        message: `Retreived Book By Id`
     });
     } catch (error) {
         if (error.name == "ValidationError"){
@@ -46,7 +46,7 @@ const updateBook = async (req, res) => {
     res.status(200).json({
         data: book,
         success: true,
-        message: `${req.method} - request to Book endpoint`
+        message: `Updated Book`
     });
     } catch (error){
         if (error.name == "ValidationError"){
@@ -66,7 +66,7 @@ const deleteBook = async (req, res) => {
     res.status(200).json({
         id,
         success: true,
-        message: `${req.method} - request to Book endpoint`
+        message: `Deleted Book`
     });
     } catch (error) {
         if (error.name == "ValidationError"){
@@ -82,12 +82,17 @@ const deleteBook = async (req, res) => {
 const createBook = async (req, res) => {
     const { book } = req.body;
     try {
+        Books.find({
+            title: req.body.title,
+            author: req.body.author
+        })
+        .exec()
         const newBook = await Books.create(book);
         console.log("data >>>", newBook);
         res.status(200).json({
-            data: newBook,
+            newBook,
             success: true,
-            message: `${req.method} - request to Book endpoint`
+            message: `Created New Book`
         });
     } catch (error) {
         if (error.name == "ValidationError"){

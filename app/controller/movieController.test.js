@@ -1,6 +1,6 @@
 const { getAllMovies, getMovieById }= require('./movieController');
 
-//jest.mock('./movieController');
+jest.mock('./movieController');
 
 describe('movieController Test', () => {
     test('Return 12 Movies', async () => {

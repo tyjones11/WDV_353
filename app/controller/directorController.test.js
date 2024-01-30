@@ -1,6 +1,6 @@
 const { getAllDirectors, getDirectorById } = require('./directorController');
 
-//jest.mock('./directorController');
+jest.mock('./directorController');
 
 describe('directorController Test', () => {
     test('Return 6 Directors', async () => {

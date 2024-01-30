@@ -1,4 +1,5 @@
-const Movies = require("../modules/Movies");
+const Movies = require("../modules/Movies")
+const axios = require('axios');
 
 const getAllMovies = async (req, res) => {
     let querString = JSON.stringify(req.query);
@@ -21,6 +22,8 @@ const getAllMovies = async (req, res) => {
     try {
     const movies = await query;
     console.log('Real Movies');
+    return await axios.get(`${process.env.moviesURL}`);
+
 
     res.status(200).json({
         data: movies,
@@ -43,6 +46,8 @@ const getMovieById = async (req, res) => {
     try {
     const movie = await Movies.findById(id, req.body, {new: true});
     console.log('Real Movies by Id');
+    return await axios.get(`${process.env.moviesURL}${id}`);
+
 
     res.status(200).json({
         data: movie,

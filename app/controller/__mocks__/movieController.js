@@ -1,5 +1,3 @@
-const Movies = require("../modules/Movies");
-
 const getAllMovies = async (req, res) => {
     let querString = JSON.stringify(req.query);
 

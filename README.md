@@ -1,24 +1,14 @@
-# Assignment 2.6 NodeJS MongoDB
+# Assignment 3.6 Unit Testing Your API
 
-Create all database functionality for 
+Write unit test using Jest for API
+
+Write 2 tests for each 
 ```
-GET
-POST
-PUT
-GET by Id
-Delete by Id
-```
-
-Controller functions for both modules
-
-Seperated route files with error handling
-
-Mongoose Schema
-```
-Two modules that relate to each other - directors and movies
-3-5 properties on each model
-At least 4 different data types over all
-Validate all necessary parts of the model
+-API with the endpoint the returns limited data based on a query string and select.
+-API that returns the pagination of the collection. Test the skip and limit of the endpoint.
+-Endpoint that returns your collection sorted. Test the sort in both directions
 ```
 
-Use Postman to create collections and requests
+All tests should pass when run with and without mocked services.
+
+All APIs are different, check result in Postman.

@@ -1,4 +1,5 @@
-const Directors = require("../modules/Directors");
+const Directors = require("../modules/Directors")
+const axios = require('axios');
 
 const getAllDirectors = async (req, res) => {
     let querString = JSON.stringify(req.query);
@@ -22,6 +23,7 @@ const getAllDirectors = async (req, res) => {
     try {
     const directors = await query;
     console.log('Real Directors');
+    return await axios.get(`${process.env.directorURL}`);
 
 
     res.status(200).json({
@@ -45,6 +47,8 @@ const getDirectorById = async (req, res) => {
     try {
     const director = await Directors.findById(id, req.body, {new: true});
     console.log('Real Directors by Id');
+    return await axios.get(`${process.env.directorURL}${id}`);
+
 
     res.status(200).json({
         data: director,

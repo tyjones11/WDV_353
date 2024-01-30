@@ -1,6 +1,6 @@
 const { getAllDirectors, getDirectorById } = require('./directorController');
 
-jest.mock('./directorController');
+//jest.mock('./directorController');
 
 describe('directorController Test', () => {
     test('Return 6 Directors', async () => {
@@ -20,18 +20,4 @@ describe('directorController Test', () => {
         expect(result.data.bornIn).toEqual("New York");
         expect(result.data.id).toEqual(6);
     })
-
-    /*test('Sort the directors by name ascending', async () => {
-        const result = await getAllDirectors();
-        expect(result.data).toHaveLength(6)
-        expect(result.sort.data.name).toEqual(["James Cameron", "James DeMonaco", "Josh Whedon", 
-        "Nick Cassavetes", "Russo Brothers", "Takashi Yamozaki", ])
-    });
-
-    test('Sort the directors by name descending', async () => {
-        const result = await getDirectorById();
-        expect(result.data).toHaveLength(6)
-        expect(result.sort.data.name).toEqual(["Takashi Yamozaki", "Russo Brothers",
-    "Nick Cassavetes", "Josh Whedon", "James DeMonaco", "James Cameron" ])
-    });*/
 });

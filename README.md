@@ -1,24 +1,7 @@
-# Assignment 2.6 NodeJS MongoDB
+# Assignment 3.4 API Query Data From MongoDB
 
-Create all database functionality for 
-```
-GET
-POST
-PUT
-GET by Id
-Delete by Id
-```
+Use query string to use at least two query operators on one of your endpoints.
 
-Controller functions for both modules
+Use select to exclude data from an endpoint with a query string.
 
-Seperated route files with error handling
-
-Mongoose Schema
-```
-Two modules that relate to each other - directors and movies
-3-5 properties on each model
-At least 4 different data types over all
-Validate all necessary parts of the model
-```
-
-Use Postman to create collections and requests
+Use sort on at least one endpoint to return a sorted get all endpoint.

@@ -1,24 +1,12 @@
-# Assignment 2.6 NodeJS MongoDB
+# Assignment 4.4 Second Collections
 
-Create all database functionality for 
-```
-GET
-POST
-PUT
-GET by Id
-Delete by Id
-```
+Finish second collection (model)
 
-Controller functions for both modules
+Use select() to exclude information like version
+Use populate() to display first collection (model) in second collection
+In all (id) functions - check to see if the object is in the database first,
+if so, display "object" not found.
+Put hardcoded messages in Messages module
+When posting your second collection, use id from the first collection (found in MongoDB)
 
-Seperated route files with error handling
-
-Mongoose Schema
-```
-Two modules that relate to each other - directors and movies
-3-5 properties on each model
-At least 4 different data types over all
-Validate all necessary parts of the model
-```
-
-Use Postman to create collections and requests
+Use Postman to view ALL your function payloads

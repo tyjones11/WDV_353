@@ -39,11 +39,10 @@ const moviesSchema = new mongoose.Schema({
         maxlength: [500, "Description cannot be more than 500 characters"],
     },
     director: {
-        type: mongoose.Schema.Types.String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Director',
     },
 },
-{   timestamps: true}
 );
 
 module.exports = mongoose.model("Movie", moviesSchema);

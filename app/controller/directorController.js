@@ -1,3 +1,4 @@
+const messages = require("../messages/messages");
 const Directors = require("../modules/Directors");
 
 const getAllDirectors = async (req, res) => {
@@ -19,25 +20,26 @@ const getAllDirectors = async (req, res) => {
     }
 };
 
-const getDirectorById = async (req, res) => {
-    const {id} = req.params;
-    try {
-    const director = await Directors.findById(id, req.body, {new: true});
+const getDirectorById = (req, res) => {
+    const directorId = req.params.directorId;
+    Directors.findById(directorId)
+    .select("name")
+    .populate("movie", "title director")
+    .exec()
+    .then(director => {
     res.status(200).json({
-        data: director,
-        success: true,
-        message: `${req.method} - request to Director endpoint`
-    });
-    } catch (error) {
-        if (error.name == "ValidationError"){
-            console.error("Error Validating!", error);
-            res.status(422).json(error);
-        } else {
-            console.error(error);
-            res.status(500).json(error);
-        }
-    }
-};
+        director: director
+    })
+})
+    .catch (error => {
+        res.status(500).json({
+            error:{
+                message: messages.director_not_found
+            }
+        })
+    })
+
+}
 
 const updateDirector = async (req, res) => {
     const {id} = req.params;

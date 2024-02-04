@@ -22,23 +22,30 @@ router.get("/", (req, res, next) => {
 
 });
 
+//GOOD - EVERYTHING WORKS CORRECTLY
 router.get("/:bookId", (req, res, next) => {
     const bookId = req.params.bookId;
-    const books = Book.find({});
-    try{res.json({
-        message: "Books - GET",
-        id: bookId,
-        books,
-    });
-} catch (error) {
-    if (error.name == "ValidationError"){
-        console.error("Error Validating!", error);
-        res.status(422).json(error);
-    } else {
-        console.error(error);
-        res.status(500).json(error);
-    }
-}
+    Book.findById(bookId)
+    .select("title author _id")
+    .exec()
+    .then(book => {
+        if(!book){
+            console.log(book);
+            return res.status(404).json({
+                message: "Book Not Found"
+            })
+        }
+        res.status(201).json({
+            book: book
+        })
+    })
+    .catch(error => {
+        res.status(500).json({
+            error: {
+                message: "Book Not Found"
+            }
+        })
+    })
 
 });
 
@@ -49,11 +56,28 @@ router.put("/:bookId", (req, res, next) => {
     });
 });
 
+//WORKS 
 router.delete("/:id", (req, res, next) => {
-    const bookId = req.paramas.bookId;
-    res.json({
-        message: "Book - DELETE"
-    });
+    const bookId = req.params.bookId;
+
+    Book.deleteOne({
+        _id: bookId
+    })
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            message: "Book Deleted",
+            request: {
+                method: "GET",
+                url: "http://localhost:300/api/v1/books" + bookId
+            }
+        })
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: error.message
+        })
+    })
 });
 
 router.post("/", (req, res, next) => {

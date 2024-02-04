@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Author = require("../modules/Authors");
+const { Messages } = require("../messages/messages");
+
 //these two lines can also be coded as:
 //const router = require("express").Router();
 
@@ -25,16 +27,18 @@ router.get("/", (req,res, next) => {
 
 })
 
+//GOOD - EVERYTHING WORKS CORRECTLY
 router.get("/:authorid", (req, res, next) => {
     const authorId = req.params.authorid;
     Author.findById(authorId)
     .select("name _id")
+    .populate("book", "title author")
     .exec()
     .then(author => {
         if(!author){
             console.log(author);
             return res.status(404).json({
-                message: "Author Not Found"
+                message: Messages.author_not_found
             })
         }
 
@@ -58,8 +62,9 @@ router.put("/", (req, res, next) => {
     });
 });
 
+//WORKS
 router.delete("/:id", (req, res, next) => {
-    const authorId = req.paramas.authorId;
+    const authorId = req.params.authorId;
 
     Author.deleteOne({
         _id: authorId

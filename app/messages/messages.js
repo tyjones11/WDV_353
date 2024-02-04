@@ -6,6 +6,7 @@ module.exports = {
     movie_updated : "Movie Updated Successfully",
     movie_cannot_save : "Unable To Save Movie",
     movie_cannot_delete : "Unable To Delete Movie",
+    movie_found : "Movie Found",
     director_not_found : "Director Not Found",
     director_deleted : "Director Deleted",
     director_saved : "Director Saved To Collection",
@@ -14,4 +15,5 @@ module.exports = {
     director_cannot_save: "Unable To Save Director",
     director_cannot_delete : "Unable To Delete Director",
     validation_error : "Validation Error",
+    director_found : "Director Found",
 }

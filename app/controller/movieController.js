@@ -30,9 +30,7 @@ const getMovieById = (req, res) => {
     .populate("director", "name")
     .exec()
     .then (movie => {
-        res.status(200).json({
-            movie: movie
-        })
+        return movieSuccessTemplate(res, result, messages.movie_found, 200);
     })
     .catch (error => {
         return errorTemplate(res, error, messages.movie_not_found, 500);
@@ -59,14 +57,16 @@ const updateMovie = async (req, res) => {
 };
 
 const deleteMovie = async (req, res) => {
-    const {id} = req.params;
-    try {
-    const movie = await Movie.findByIdAndDelete(id, req.body, {new: true});
-    res.status(200).json({
-        id,
-        message: messages.movie_deleted
-    });
-    } catch (error) {
+    const movidId = req.params.movidId;
+
+    Movie.deleteOne({
+        _id: movidId
+    })
+    .exec()
+    .then(result => {
+        return movieSuccessTemplate(res, result, messages.movie_deleted, 200);
+    })
+    .catch (error => {
         if (error.name == "ValidationError"){
             return validationTemplate(res, error, messages.validation_error, 422);
 
@@ -74,7 +74,7 @@ const deleteMovie = async (req, res) => {
             return errorTemplate(res, error, messages.movie_cannot_delete, 500);
 
         }
-    }
+    })
 };
 
 const createMovie = (req, res) => {
@@ -84,9 +84,7 @@ const createMovie = (req, res) => {
     .then((result) => {
         console.log(result);
         if (result.length > 0) {
-            res.status(406).json({
-                message: messages.movie_already_cataloged
-            });
+            throw new Error(messages.movie_already_cataloged)
         } else {
             const newMovie = new Movie ({
                 title: req.body.title,

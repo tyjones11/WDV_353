@@ -4,7 +4,7 @@ const authorsSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: {
         type: String,
-        //required: [true, "You are required to have an Author"],
+        required: [true, "You are required to have an Author"],
         unique: [true, "You can only have one Author of that name"],
         trim: true,
         maxlength: [50,"Your name is too long"],
@@ -12,11 +12,11 @@ const authorsSchema = mongoose.Schema({
     book: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Book",
-        //required: true,
+        required: true,
     },
     age: {
         type: Number,
-        //required: true,
+        required: true,
     }
 },
 {   timestamps: true}

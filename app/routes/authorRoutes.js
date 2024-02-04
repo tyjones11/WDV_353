@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Author = require("../modules/Authors");
-const Authors = require("../modules/Authors");
 //these two lines can also be coded as:
 //const router = require("express").Router();
 
 router.get("/", (req,res, next) => {
-    const author = Authors.find({});
     try{
+        const author = author.find({});
+
         res.json({
             data: author,
             message: "Authors - GET"
@@ -26,11 +26,29 @@ router.get("/", (req,res, next) => {
 })
 
 router.get("/:authorid", (req, res, next) => {
-    const authorId = req.params.authorId;
-    res.json({
-        message: "Authors - GET",
-        id: authorId
-    });
+    const authorId = req.params.authorid;
+    Author.findById(authorId)
+    .select("name _id")
+    .exec()
+    .then(author => {
+        if(!author){
+            console.log(author);
+            return res.status(404).json({
+                message: "Author Not Found"
+            })
+        }
+
+        res.status(201).json({
+            author: author
+        })
+    })
+    .catch(error => {
+        res.status(500).json({
+            error:{
+                message: "Author not found"
+            }
+        })
+    })
 });
 
 router.put("/", (req, res, next) => {
@@ -42,9 +60,25 @@ router.put("/", (req, res, next) => {
 
 router.delete("/:id", (req, res, next) => {
     const authorId = req.paramas.authorId;
-    res.json({
-        message: "Authors - DELETE"
-    });
+
+    Author.deleteOne({
+        _id: authorId
+    })
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            message: "Author Deleted",
+            request: {
+                method: "GET", 
+                url: "http://localhost:3000/api/v1/authors/" + authorId
+            }
+        })
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: error.message
+        })
+    })
 });
 
 router.post("/", (req, res, next) => {

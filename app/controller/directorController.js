@@ -1,21 +1,22 @@
 const messages = require("../messages/messages");
 const Directors = require("../modules/Directors");
+const findDirector = require("../db/config");
+const postDirector = require("../db/config");
+const errorTemplate = require("../templates/errorTemplate");
+const validationTemplate = require("../templates/validationTemplate");
+
 
 const getAllDirectors = async (req, res) => {
     const directors = await Directors.find({});
     try {
     res.status(200).json({
         data: directors,
-        success: true,
-        message: `${req.method} - request to Director endpoint`
     });
     } catch (error) {
         if (error.name == "ValidationError"){
-            console.error("Error Validating!", error);
-            res.status(422).json(error);
+            return validationTemplate(res, error, messages.validation_error, 422);
         } else {
-            console.error(error);
-            res.status(500).json(error);
+            return errorTemplate(res, error, messages.director_not_found, 500);       
         }
     }
 };
@@ -32,11 +33,7 @@ const getDirectorById = (req, res) => {
     })
 })
     .catch (error => {
-        res.status(500).json({
-            error:{
-                message: messages.director_not_found
-            }
-        })
+        return errorTemplate(res, error, messages.director_not_found, 500);
     })
 
 }
@@ -47,16 +44,14 @@ const updateDirector = async (req, res) => {
     const director = await Directors.findByIdAndUpdate(id, req.body, {new: true});
     res.status(200).json({
         data: director,
-        success: true,
-        message: `${req.method} - request to Director endpoint`
+        message: messages.director_updated
     });
     } catch (error){
         if (error.name == "ValidationError"){
-            console.error("Error Validating!", error);
-            res.status(422).json(error);
+            return validationTemplate(res, error, messages.validation_error, 422);
         } else {
-            console.error(error);
-            res.status(500).json(error);
+            return errorTemplate(res, error, messages.director_cannot_save, 500);
+
         }
     }
 };
@@ -68,39 +63,51 @@ const deleteDirector = async (req, res) => {
     res.status(200).json({
         id,
         data: director,
-        success: true,
-        message: `${req.method} - request to Director endpoint`
+        message: messages.director_deleted
     });
     } catch (error) {
         if (error.name == "ValidationError"){
-            console.error("Error Validating!", error);
-            res.status(422).json(error);
+            return validationTemplate(res, error, messages.validation_error, 422);
         } else {
-            console.error(error);
-            res.status(500).json(error);
+            return errorTemplate(res, error, messages.director_cannot_delete, 500);
         }
     }
 };
 
-const createDirector = async (req, res) => {
-    const { director } = req.body;
-    try {
-        const newDirector = await Directors.create(director);
-        console.log("data >>>", newDirector);
-        res.status(200).json({
-            data: newDirector,
-            success: true,
-            message: "Director Saved"
-        });
-    } catch (error) {
-        if (error.name == "ValidationError"){
-            console.error("Error Validating!", error);
-            res.status(422).json(error);
+const createDirector = (req, res) => {
+    findDirector({
+        name: req.body.name
+    })
+    .then((result) => {
+        console.log(result);
+        if (result.length > 0) {
+            res.status(406).json({
+                message: messages.director_already_cataloged
+            });
         } else {
-            console.error(error);
-            res.status(500).json(error);
-        }
-    }
+            const newDirector = new Directors ({
+                name: req.body.name,
+                age: req.body.age,
+                bornIn: req.body.bornIn,
+            });
+            postDirector(newDirector)
+            .then((result) => {
+                res.status(200).json({
+                message: messages.director_saved,
+                director: {
+                    name: req.body.name,
+                    age: req.body.age,
+                    bornIn: req.body.bornIn,
+                },
+            });
+        })
+        .catch((error) => {
+            return errorTemplate(res, error, messages.director_cannot_save, 500);
+        });
+    }})
+    .catch((error) => {
+        return errorTemplate(res, error, messages.movie_cannot_save, 500);
+    });
 };
 
 module.exports = {

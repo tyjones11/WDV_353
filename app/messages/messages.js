@@ -4,9 +4,14 @@ module.exports = {
     movie_saved : "Movie Saved To Collection",
     movie_already_cataloged : "Movie Already Cataloged",
     movie_updated : "Movie Updated Successfully",
+    movie_cannot_save : "Unable To Save Movie",
+    movie_cannot_delete : "Unable To Delete Movie",
     director_not_found : "Director Not Found",
     director_deleted : "Director Deleted",
     director_saved : "Director Saved To Collection",
     director_already_cataloged : "Director Already Cataloged",
-    director_updated : "Director Updated Successfully"
+    director_updated : "Director Updated Successfully",
+    director_cannot_save: "Unable To Save Director",
+    director_cannot_delete : "Unable To Delete Director",
+    validation_error : "Validation Error",
 }

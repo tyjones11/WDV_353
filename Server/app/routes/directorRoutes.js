@@ -36,21 +36,21 @@ router.get('/:id', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
     const directorId = req.params.directorId
-    .then(director => {
-    const director = await Director.findByIdAndUpdate(id, req.body, {new: true});
-    res.status(200).json({
-        data: director,
-        message: messages.director_updated
-    });
+    Director.updateOne({
+        _id: directorId
     })
-    .catch (error) => {
+    .exec()
+    .then(director => {
+        return directorSuccessTemplate(res, result, messages.director_updated, 200);
+    })
+    .catch (error => {
         if (error.name == "ValidationError"){
             return validationTemplate(res, error, messages.validation_error, 422);
         } else {
             return errorTemplate(res, error, messages.director_cannot_save, 500);
 
         }
-    }
+    })
 });
 
 router.delete('/:id', (req, res, next) => {

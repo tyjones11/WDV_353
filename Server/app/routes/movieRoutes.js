@@ -34,21 +34,20 @@ router.get('/:id', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
     const movieId = req.params.movieId
-    .then(movie => {
-    const movie = await Movie.findByIdAndUpdate(id, req.body, {new: true});
-    res.status(200).json({
-        data: movie,
-        message: messages.movie_updated
-    });
+    Movie.updateOne({
+        _id: movieId
     })
-    .catch (error) => {
+    .exec()
+    .then(movie => {
+        return movieSuccessTemplate(res, result, messages.movie_updated, 200);
+    })
+    .catch(error => {
         if (error.name == "ValidationError"){
             return validationTemplate(res, error, messages.validation_error, 422);
         } else {
             return errorTemplate(res, error, messages.movie_cannot_save, 500);
-
         }
-    }
+    })
 });
 
 router.delete('/:id', (req, res, next) => {

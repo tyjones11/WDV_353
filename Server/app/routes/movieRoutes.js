@@ -4,7 +4,9 @@ const { findMovie , postMovie } = require('../db/config');
 const Movie = require ('../modules/Movies');
 const mongoose = require('mongoose');
 const messages = require('../messages/messages')
-const {movieSuccessTemplate, errorTemplate, validationTemplate} = require('../templates');
+const movieSuccessTemplate = require('../templates/movieSuccessTemplate');
+const errorTemplate = require('../templates/errorTemplate');
+const validationTemplate = require('../templates/validationTemplate');
 
 router.get('/', (req, res, next) => {
     console.log("Getting Movies");

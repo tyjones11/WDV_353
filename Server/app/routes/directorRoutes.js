@@ -4,7 +4,9 @@ const { findDirector , postDirector } = require('../db/config');
 const Director = require ('../modules/Directors');
 const mongoose = require('mongoose');
 const messages = require('../messages/messages')
-const {directorSuccessTemplate, errorTemplate, validationTemplate} = require('../templates');
+const directorSuccessTemplate = require('../templates/directorSuccessTemplate');
+const errorTemplate = require('../templates/errorTemplate');
+const validationTemplate = require('../templates/validationTemplate');
 
 router.get('/', (req, res, next) => {
     console.log("Getting Directors");

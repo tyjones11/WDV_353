@@ -2,17 +2,6 @@ const mongoose = require("mongoose");
 const Movie = require('../modules/Movies');
 const Director = require('../modules/Directors');
 
-const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI, {
-            useUnifiedTopology: true,
-        });
-        console.log(`Real Connected to MongoDB successfully ${conn.connection.host}`);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 const connect = () => {
     mongoose.connect('mongodb://localhost:27017/movieshelf', (err) => {
         console.log('Real Connected To DB');
@@ -44,4 +33,4 @@ const disconnect = () => {
     mongoose.connection.close();
 };
 
-module.exports = connectDB, connect, postDirector, findDirector, postMovie, findMovie, disconnect;
+module.exports = connect, postDirector, findDirector, postMovie, findMovie, disconnect;

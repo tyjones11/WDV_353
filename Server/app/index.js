@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const mongoose = require('mongoose');
-const routeHandler = require("./routes");
+const dirctorRoutes = require("../app/routes/directorRoutes");
+const movieRoutes = require("../app/routes/movieRoutes");
 const cors = require('cors');
 
 //middleware for logging
@@ -28,14 +29,18 @@ app.use((req, res, next) => {
     next();
 })
 
+//Router - define router
+app.use('/directors', dirctorRoutes);
+app.use('/movies', movieRoutes);
 
+//Service - define local host 3000
 app.get("/", (req, res) => {
-    res.status(200).json({
-        message: "API is running",
-        success: true
+    res.status(201).json({
+        message: "Service is up",
+        method: req.method
     });
 });
 
-app.use("/api", routeHandler);
+mongoose.connect(process.env.MONGODB_URI)
 
 module.exports = app;

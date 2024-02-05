@@ -33,4 +33,4 @@ const disconnect = () => {
     mongoose.connection.close();
 };
 
-module.exports = connect, postDirector, findDirector, postMovie, findMovie, disconnect;
+module.exports = connectDB, connect, postDirector, findDirector, postMovie, findMovie, disconnect;

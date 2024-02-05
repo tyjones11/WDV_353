@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const mongoose = require('mongoose');
-const dirctorRoutes = require("../app/routes/directorRoutes");
-const movieRoutes = require("../app/routes/movieRoutes");
+const dirctorRoutes = require("./routes/directorRoutes");
+const movieRoutes = require("./routes/movieRoutes");
 const cors = require('cors');
 
 //middleware for logging
@@ -41,6 +41,7 @@ app.get("/", (req, res) => {
     });
 });
 
-mongoose.connect(process.env.MONGODB_URI)
+//connect to mongoDB
+mongoose.connect(process.env.mongoDBURL)
 
 module.exports = app;

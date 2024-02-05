@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const directorsSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     name: {
         type: String,
         required: [true, "You are required to have an Director"],
@@ -17,8 +18,7 @@ const directorsSchema = new mongoose.Schema({
         required: [true, "You are required to have the state"],
         maxlength: [50, "The state name is too long"],
     }
-
 },
 );
 
-module.exports = mongoose.model("Director", directorsSchema);
+module.exports = mongoose.model('Director', directorsSchema);
